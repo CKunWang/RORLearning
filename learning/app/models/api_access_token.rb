@@ -1,6 +1,6 @@
 class ApiAccessToken < ApplicationRecord
 
-  belongs_to :user
+  belongs_to :devise_user, optional: true
 
   before_create :generate_keys
 

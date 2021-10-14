@@ -12,7 +12,9 @@ module ApiV0
       end
 
       def token
-        @token = ApiAccessToken.joins(:user).where(key: @params[:access_key]).first
+        @token = ApiAccessToken.joins("INNER JOIN devise_users ON devise_users.id = api_access_tokens.user_id").where(key: @params[:access_key]).first
+
+        #puts "join token #{@token.inspect}"
       end
 
       def check_token!

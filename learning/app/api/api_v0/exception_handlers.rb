@@ -44,4 +44,10 @@ module ApiV0
       super code: 2001, text: 'Authorization failed', status: 401
     end
   end
+
+  class LoginError < Error
+    def initialize
+      super code: 2002, text: 'email or password wrong', status: 401
+    end
+  end
 end
