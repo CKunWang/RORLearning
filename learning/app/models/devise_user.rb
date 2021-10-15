@@ -5,4 +5,8 @@ class DeviseUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :api_access_tokens
+
+  def isAdmin?
+    self.role == "admin"
+  end
 end

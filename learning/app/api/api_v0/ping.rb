@@ -3,6 +3,8 @@ module ApiV0
     desc 'Ping pong'
     get "/ping" do
       authenticate!
+      authenticate_admin!
+
       "pong"
     end
   end

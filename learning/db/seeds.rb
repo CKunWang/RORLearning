@@ -10,3 +10,4 @@
 #User.create(account: "admin", password: "123456", role: "manager")
 
 DeviseUser.create! :email => 'admin@gmail.com', :password => '123456789', :password_confirmation => '123456789', :role=>'admin'
+DeviseUser.create! :email => 'user@gmail.com', :password => '123456789', :password_confirmation => '123456789', :role=>'user'
