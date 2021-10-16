@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'grape'
 gem 'devise'
+gem "grape-entity"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

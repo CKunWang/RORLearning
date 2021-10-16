@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  currency: MyString
+  price: 1
+  lesson_type: MyString
+  is_available: false
+  url: MyString
+  description: MyText
+  expired_days: 1
+
+two:
+  subject: MyString
+  currency: MyString
+  price: 1
+  lesson_type: MyString
+  is_available: false
+  url: MyString
+  description: MyText
+  expired_days: 1
