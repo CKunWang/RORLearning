@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  devise_user_id: 1
+  lesson_id: 1
+  currency: MyString
+  price: 1
+  expired_time: 2021-10-17 15:30:30
+
+two:
+  devise_user_id: 1
+  lesson_id: 1
+  currency: MyString
+  price: 1
+  expired_time: 2021-10-17 15:30:30

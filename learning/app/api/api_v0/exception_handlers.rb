@@ -50,4 +50,17 @@ module ApiV0
       super code: 2002, text: 'email or password wrong', status: 401
     end
   end
+
+  class LessonNotFoundError < Error
+    def initialize
+      super code: 2003, text: 'lesson not found', status: 404
+    end
+  end
+
+  class DuplicatePurchaseError < Error
+    def initialize
+      super code: 2004, text: 'purchased lesson duplicate', status: 500
+    end
+  end
+
 end

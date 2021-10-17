@@ -5,7 +5,9 @@ class DeviseUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :api_access_tokens
-  has_many :lessons
+
+  has_many :user_purchase_lessons
+  has_many :lessons, :through => :user_purchase_lessons
 
   def isAdmin?
     self.role == "admin"
