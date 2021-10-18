@@ -116,5 +116,31 @@ module ApiV0
     end
 
 
+
+    desc "get purchased lesson"
+    get "/lessons/purchased" do
+
+      purchase_map = UserPurchaseLesson.where(:devise_user_id => current_user.id)
+
+      lesson_ids = []
+
+      purchase_map.each { |map| lesson_ids.push(map.lesson_id) }
+
+      lesson_ids = lesson_ids.uniq
+
+      puts lesson_ids.inspect
+
+      purchased_lesson = Lesson.where(id: lesson_ids)
+
+      puts purchased_lesson.inspect
+
+      data = { :purchased_maps => purchase_map, :lessons => purchased_lesson }
+
+      present data, with: ApiV0::Entities::PurchasedLesson
+
+      
+    end
+
+
   end
 end
