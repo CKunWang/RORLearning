@@ -120,7 +120,22 @@ module ApiV0
     desc "get purchased lesson"
     get "/lessons/purchased" do
 
-      purchase_map = UserPurchaseLesson.where(:devise_user_id => current_user.id)
+      puts params[:lesson_type].inspect
+
+      puts params[:available].inspect
+
+      if params[:lesson_type] && params[:available] == 'true'
+        purchase_map = UserPurchaseLesson.joins(:lesson).where(:devise_user_id => current_user.id).where("expired_time > ?", Time.now.utc).where("lessons.lesson_type = ?", params[:lesson_type])
+      elsif params[:lesson_type]
+        purchase_map = UserPurchaseLesson.joins(:lesson).where(:devise_user_id => current_user.id).where("lessons.lesson_type = ?", params[:lesson_type])
+      elsif params[:available] == 'true'
+        purchase_map = UserPurchaseLesson.where(:devise_user_id => current_user.id).where("expired_time > ?", Time.now.utc)
+      else
+        purchase_map = UserPurchaseLesson.where(:devise_user_id => current_user.id)
+      end
+
+
+      #purchase_map = UserPurchaseLesson.where(:devise_user_id => current_user.id)
 
       lesson_ids = []
 
@@ -128,11 +143,7 @@ module ApiV0
 
       lesson_ids = lesson_ids.uniq
 
-      puts lesson_ids.inspect
-
       purchased_lesson = Lesson.where(id: lesson_ids)
-
-      puts purchased_lesson.inspect
 
       data = { :purchased_maps => purchase_map, :lessons => purchased_lesson }
 
@@ -140,7 +151,6 @@ module ApiV0
 
       
     end
-
 
   end
 end
