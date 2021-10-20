@@ -63,4 +63,11 @@ module ApiV0
     end
   end
 
+  class DuplicateEmailError < Error
+    def initialize
+      super code: 2005, text: 'sign up email duplicate', status: 401
+    end
+  end
+
+
 end
