@@ -58,7 +58,7 @@ module ApiV0
     patch "/lessons/:id" do
 
       authenticate_admin!
-      lesson = Lesson.find_by(id: params[:id])
+      lesson = Lesson.find(params[:id])
 
       if lesson.update(declared(params, include_missing: false).except(:access_key))
         present lesson, with: ApiV0::Entities::Lesson
@@ -76,11 +76,15 @@ module ApiV0
     delete "/lessons/:id" do
 
       authenticate_admin!
-      lesson = Lesson.find_by(id: params[:id])
+
+      # use find_by will return nil,change to use find to return error
+      #lesson = Lesson.find_by(id: params[:id])
+      lesson = Lesson.find(params[:id])
 
       if lesson.destroy
         present lesson, with: ApiV0::Entities::Lesson
       else
+        puts "delete error"
         raise StandardError, $!
       end
     end

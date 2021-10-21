@@ -19,6 +19,15 @@ module ApiV0
           rack_response({ 'message' => '404 Not found' }.to_json, 404)
         end
 
+        #rescue_from ActiveRecord::RecordInvalid do |e|
+        #  rack_response({
+        #    error: {
+        #      code: 1001,
+        #      message: e.message
+        #    }
+        #  }.to_json, e.status)
+        #end
+
         # 任何不存在的路由都返回 404 Not Found
         route :any, '*path' do
           error!('404 Not Found', 404)
@@ -66,6 +75,12 @@ module ApiV0
   class DuplicateEmailError < Error
     def initialize
       super code: 2005, text: 'sign up email duplicate', status: 401
+    end
+  end
+
+  class InvaildSignupError < Error
+    def initialize
+      super code: 2006, text: 'sign up with invalid data', status: 401
     end
   end
 

@@ -15,6 +15,8 @@ module ApiV0
 
     rescue ActiveRecord::RecordInvalid => e
       puts e.inspect
+      p e.message
+      raise InvaildSignupError      
 
     end
 
