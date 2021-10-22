@@ -3,6 +3,8 @@ module ApiV0
     class Middleware < Grape::Middleware::Base
       def before
         if auth_provided?
+
+          #@env 繼承自 middleware::Base，透過 rack call 時將環境參數帶入
           @env["api_v0.token"] = Authenticator.new(request, params).authenticate!
           
           
@@ -23,7 +25,8 @@ module ApiV0
       end
 
       def auth_provided?
-        params[:access_key].present?
+        request.headers["Token"].present?
+        #params[:access_key].present?
       end
     end
   end
