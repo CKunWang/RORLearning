@@ -13,6 +13,10 @@ module ApiV0
 
       token.user_id = user.id
 
+      utc_now = Time.now.utc
+
+      token.expired_time = utc_now + 1.hours
+
       token.save
 
       token.key

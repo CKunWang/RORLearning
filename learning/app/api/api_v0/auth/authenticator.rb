@@ -13,7 +13,7 @@ module ApiV0
 
       def token
         #@token = ApiAccessToken.joins("INNER JOIN devise_users ON devise_users.id = api_access_tokens.user_id").where(key: @params[:access_key]).first
-        @token = ApiAccessToken.joins("INNER JOIN devise_users ON devise_users.id = api_access_tokens.user_id").where(key: @request.headers["Token"]).first
+        @token = ApiAccessToken.joins("INNER JOIN devise_users ON devise_users.id = api_access_tokens.user_id").where(key: @request.headers["Token"]).where("expired_time > ?", Time.now.utc).first
 
         #puts "join token #{@token.inspect}"
       end
